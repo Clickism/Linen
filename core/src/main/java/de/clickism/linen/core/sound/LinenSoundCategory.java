@@ -50,8 +50,4 @@ public enum LinenSoundCategory {
      * Voice sounds (speech and vocalizations).
      */
     VOICE,
-    /**
-     * User interface sounds (menus, clicks, notifications).
-     */
-    UI,
 }

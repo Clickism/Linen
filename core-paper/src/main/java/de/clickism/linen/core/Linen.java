@@ -4,7 +4,7 @@
  * See LICENSE.md for details.
  */
 
-package de.clickism.linen.core.paper;
+package de.clickism.linen.core;
 
 import de.clickism.linen.core.paper.player.PaperPlayer;
 import de.clickism.linen.core.player.LinenPlayer;

@@ -7,6 +7,7 @@
 package de.clickism.linen.core.paper.player;
 
 import de.clickism.linen.core.message.ChatLocation;
+import de.clickism.linen.core.paper.PlatformObjects;
 import de.clickism.linen.core.platform.PlatformObjectNotFoundException;
 import de.clickism.linen.core.player.LinenPlayer;
 import de.clickism.linen.core.sound.LinenSoundCategory;
@@ -37,7 +38,7 @@ public record PaperPlayer(Player player) implements LinenPlayer {
 
     @Override
     public void playSound(String sound, LinenSoundCategory category, float volume, float pitch) throws PlatformObjectNotFoundException {
-        player.playSound(player, sound, volume, pitch);
+        player.playSound(player, sound, PlatformObjects.soundCategory(category), volume, pitch);
     }
 
     @Override
