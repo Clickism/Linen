@@ -22,6 +22,9 @@ dependencies {
     // Core
     implementation(include(project(":core"))!!)
     implementation(include(project(path = ":core-fabric:${minecraftVersion}", configuration = "namedElements"))!!)
+    implementation(include("net.kyori:adventure-api:4.25.0")!!)
+    implementation(include("net.kyori:adventure-text-minimessage:4.25.0")!!)
+    implementation(include("net.kyori:adventure-text-serializer-legacy:4.25.0")!!)
     // Fabric
     modImplementation("net.fabricmc:fabric-loader:${property("deps.fabric_loader")}")
     modImplementation("net.fabricmc.fabric-api:fabric-api:${property("deps.fabric_api")}")

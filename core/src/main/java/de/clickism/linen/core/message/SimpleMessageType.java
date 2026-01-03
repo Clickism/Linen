@@ -6,30 +6,25 @@
 
 package de.clickism.linen.core.message;
 
-import de.clickism.linen.core.player.LinenPlayer;
-
-import java.util.function.Consumer;
-
 /**
  * A builder class for creating custom message types with specific formats and sounds.
  */
-public class MessageTypeImpl implements MessageType {
+public class SimpleMessageType extends SoundMessageType<SimpleMessageType> {
     private String chatFormat;
     private String overlayFormat;
-    private Consumer<LinenPlayer> soundPlayer = player -> {};
 
     /**
-     * Creates a new MessageTypeBuilder instance.
+     * Creates a SimpleMessageType with default formats.
      */
-    protected MessageTypeImpl() {}
+    protected SimpleMessageType() {}
 
     /**
      * Sets the chat format for this message type.
      *
      * @param format The format string, where %s will be replaced by the message.
-     * @return The current MessageTypeBuilder instance.
+     * @return The current SimpleMessageType instance.
      */
-    public MessageTypeImpl chat(String format) {
+    public SimpleMessageType chat(String format) {
         this.chatFormat = format;
         return this;
     }
@@ -38,21 +33,10 @@ public class MessageTypeImpl implements MessageType {
      * Sets the overlay format for this message type.
      *
      * @param format The format string, where %s will be replaced by the message.
-     * @return The current MessageTypeBuilder instance.
+     * @return The current SimpleMessageType instance.
      */
-    public MessageTypeImpl overlay(String format) {
+    public SimpleMessageType overlay(String format) {
         this.overlayFormat = format;
-        return this;
-    }
-
-    /**
-     * Sets the sound to be played when this message type is sent.
-     *
-     * @param soundPlayer A consumer that accepts a LinenPlayer and plays the desired sound.
-     * @return The current MessageTypeBuilder instance.
-     */
-    public MessageTypeImpl sound(Consumer<LinenPlayer> soundPlayer) {
-        this.soundPlayer = soundPlayer;
         return this;
     }
 
@@ -61,10 +45,5 @@ public class MessageTypeImpl implements MessageType {
         return location == ChatLocation.CHAT
                 ? String.format(chatFormat, message)
                 : String.format(overlayFormat, message);
-    }
-
-    @Override
-    public void playSound(LinenPlayer player) {
-        soundPlayer.accept(player);
     }
 }

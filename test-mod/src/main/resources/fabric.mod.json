@@ -15,7 +15,7 @@
   "environment": "*",
   "entrypoints": {
     "main": [
-      "de.clickism.linentestmod.TestMod"
+      "de.clickism.linentestmod.LinenTestMod"
     ]
   },
   "depends": {
