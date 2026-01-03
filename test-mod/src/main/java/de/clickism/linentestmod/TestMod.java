@@ -1,6 +1,6 @@
 package de.clickism.linentestmod;
 
-import de.clickism.linen.core.fabric.Linen;
+import de.clickism.linen.core.Linen;
 import net.fabricmc.api.ModInitializer;
 import net.fabricmc.fabric.api.event.player.PlayerBlockBreakEvents;
 
