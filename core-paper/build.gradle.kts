@@ -6,6 +6,8 @@
 
 plugins {
     id("java")
+    id("maven-publish")
+    id("signing")
 }
 
 group = "de.clickism"
@@ -28,4 +30,41 @@ dependencies {
 
 tasks.test {
     useJUnitPlatform()
+}
+
+publishing {
+    publications {
+        create<MavenPublication>("mavenJava") {
+            from(components["java"])
+            groupId = group.toString()
+            artifactId = "linen-core-paper"
+            version = "${version}"
+            pom {
+                name.set("Linen")
+                description.set("Paper implementation of the server side development framework Linen.")
+                url.set("https://github.com/Clickism/Linen")
+                licenses {
+                    license {
+                        name.set("GNU General Public License v3.0")
+                        url.set("https://www.gnu.org/licenses/gpl-3.0.html")
+                    }
+                }
+                developers {
+                    developer {
+                        id.set("Clickism")
+                        name.set("Clickism")
+                        email.set("dev@clickism.de")
+                    }
+                }
+                scm {
+                    connection.set("scm:git:git://github.com/Clickism/Configured.git")
+                    developerConnection.set("scm:git:ssh://github.com/Clickism/Configured.git")
+                    url.set("https://github.com/Clickism/Configured")
+                }
+            }
+        }
+    }
+    signing {
+        sign(publishing.publications["mavenJava"])
+    }
 }
