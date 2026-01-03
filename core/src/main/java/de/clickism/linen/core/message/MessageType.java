@@ -39,7 +39,7 @@ public interface MessageType {
     /**
      * Predefined message type for error messages.
      */
-    MessageType FAIL = MessageType.icon("❌")
+    MessageType ERROR = MessageType.icon("❌")
             .iconColor("red")
             .sound("block.amethyst_block.resonate", 1f, .5f);
 

@@ -69,6 +69,17 @@ public abstract class SoundMessageType<T> implements MessageType {
         return (T) this;
     }
 
+    /**
+     * Sets the sound to be played from another message type.
+     *
+     * @param other the other message type
+     * @return the current message type instance.
+     */
+    public T sound(MessageType other) {
+        this.soundCallback = other::playSound;
+        return (T) this;
+    }
+
     @Override
     public void playSound(LinenPlayer player) {
         soundCallback.accept(player);
