@@ -1,0 +1,30 @@
+{
+  "schemaVersion": 1,
+  "id": "linen-test-mod",
+  "version": "${version}",
+  "name": "Linen Test Mod",
+  "description": "Test mod for Linen",
+  "authors": [
+    "Clickism"
+  ],
+  "contact": {
+    "homepage": "https://clickism.de/",
+    "sources": "https://github.com/Clickism/Linen"
+  },
+  "license": "ARR",
+  "environment": "*",
+  "entrypoints": {
+    "main": [
+      "de.clickism.linentestmod.TestMod"
+    ]
+  },
+  "depends": {
+    "fabricloader": ">=${fabricVersion}",
+    "minecraft": "${targetVersion}",
+    "java": ">=17",
+    "fabric-api": "*"
+  },
+  "suggests": {
+    "another-mod": "*"
+  }
+}

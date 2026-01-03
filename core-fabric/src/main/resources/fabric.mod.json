@@ -1,0 +1,25 @@
+{
+  "schemaVersion": 1,
+  "id": "linen-core-fabric",
+  "version": "${version}",
+  "name": "Linen API Core Fabric",
+  "description": "Fabric implementation of the Linen API core library",
+  "authors": [
+    "Clickism"
+  ],
+  "contact": {
+    "homepage": "https://clickism.de/",
+    "sources": "https://github.com/Clickism/Linen"
+  },
+  "license": "ARR",
+  "environment": "*",
+  "depends": {
+    "fabricloader": ">=${fabricVersion}",
+    "minecraft": "${targetVersion}",
+    "java": ">=17",
+    "fabric-api": "*"
+  },
+  "suggests": {
+    "another-mod": "*"
+  }
+}

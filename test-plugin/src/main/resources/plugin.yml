@@ -1,0 +1,7 @@
+name: LinenTestPlugin
+version: '${version}'
+main: de.clickism.linentestplugin.LinenTestPlugin
+api-version: '1.21'
+authors: [Clickism]
+description: Test plugin for Linen
+
