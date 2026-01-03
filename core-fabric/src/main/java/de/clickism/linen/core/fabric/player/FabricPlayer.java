@@ -6,7 +6,7 @@
 
 package de.clickism.linen.core.fabric.player;
 
-import de.clickism.linen.core.exception.PlatformObjectNotFoundException;
+import de.clickism.linen.core.platform.PlatformObjectNotFoundException;
 import de.clickism.linen.core.fabric.PlatformObjects;
 import de.clickism.linen.core.message.ChatLocation;
 import de.clickism.linen.core.player.LinenPlayer;

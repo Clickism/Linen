@@ -6,7 +6,7 @@
 
 package de.clickism.linen.core.fabric;
 
-import de.clickism.linen.core.exception.PlatformObjectNotFoundException;
+import de.clickism.linen.core.platform.PlatformObjectNotFoundException;
 import de.clickism.linen.core.sound.LinenSoundCategory;
 import net.minecraft.sound.SoundCategory;
 import net.minecraft.sound.SoundEvent;

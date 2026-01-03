@@ -4,7 +4,7 @@
  * See LICENSE.md for details.
  */
 
-package de.clickism.linen.core.exception;
+package de.clickism.linen.core.platform;
 
 public class PlatformObjectNotFoundException extends IllegalArgumentException {
     public PlatformObjectNotFoundException(Class<?> objectClass, String key, String message) {

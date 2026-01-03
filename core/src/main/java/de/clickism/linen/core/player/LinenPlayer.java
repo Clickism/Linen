@@ -6,7 +6,7 @@
 
 package de.clickism.linen.core.player;
 
-import de.clickism.linen.core.exception.PlatformObjectNotFoundException;
+import de.clickism.linen.core.platform.PlatformObjectNotFoundException;
 import de.clickism.linen.core.message.ChatLocation;
 import de.clickism.linen.core.platform.PlatformObjectHolder;
 import de.clickism.linen.core.sound.LinenSoundCategory;
