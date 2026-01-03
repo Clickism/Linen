@@ -6,7 +6,15 @@
 
 package de.clickism.linen.core.scheduler;
 
+/**
+ * Functional interface for executing Linen tasks.
+ */
 @FunctionalInterface
 public interface LinenTaskExecutor {
+    /**
+     * Executes a Linen task.
+     *
+     * @param task The task that triggered the execution.
+     */
     void execute(LinenTask task);
 }
