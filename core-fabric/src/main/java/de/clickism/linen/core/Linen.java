@@ -6,11 +6,14 @@
 
 package de.clickism.linen.core;
 
+import de.clickism.linen.core.fabric.player.FabricCommandSender;
 import de.clickism.linen.core.fabric.player.FabricPlayer;
+import de.clickism.linen.core.player.LinenCommandSender;
 import de.clickism.linen.core.player.LinenPlayer;
 import de.clickism.linen.core.scheduler.LinenScheduler;
 import net.fabricmc.fabric.api.event.lifecycle.v1.ServerTickEvents;
 import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.server.command.ServerCommandSource;
 import net.minecraft.server.network.ServerPlayerEntity;
 
 /**
@@ -34,5 +37,25 @@ public class Linen {
      */
     public static LinenPlayer player(PlayerEntity player) {
         return new FabricPlayer((ServerPlayerEntity) player);
+    }
+
+    /**
+     * Wraps a ServerCommandSource into a LinenCommandSender.
+     *
+     * @param source The command source to wrap.
+     * @return The wrapped LinenCommandSender.
+     */
+    public static LinenCommandSender commandSender(ServerCommandSource source) {
+        return new FabricCommandSender(source);
+    }
+
+    /**
+     * Wraps a Fabric PlayerEntity into a LinenCommandSender.
+     *
+     * @param player The player to wrap.
+     * @return The wrapped LinenCommandSender.
+     */
+    public static LinenCommandSender commandSender(PlayerEntity player) {
+        return new FabricCommandSender(((ServerPlayerEntity) player).getCommandSource());
     }
 }

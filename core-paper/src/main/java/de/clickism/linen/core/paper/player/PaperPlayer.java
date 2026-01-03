@@ -16,7 +16,14 @@ import org.bukkit.entity.Player;
 
 import java.util.UUID;
 
-public record PaperPlayer(Player player) implements LinenPlayer {
+public class PaperPlayer extends PaperCommandSender implements LinenPlayer {
+    private final Player player;
+
+    public PaperPlayer(Player player) {
+        super(player);
+        this.player = player;
+    }
+
     @Override
     public String getName() {
         return player.getName();

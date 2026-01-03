@@ -7,19 +7,14 @@
 package de.clickism.linen.core.player;
 
 import de.clickism.linen.core.platform.PlatformObjectNotFoundException;
-import de.clickism.linen.core.message.ChatLocation;
-import de.clickism.linen.core.platform.PlatformObjectHolder;
 import de.clickism.linen.core.sound.LinenSoundCategory;
-import net.kyori.adventure.text.Component;
-import net.kyori.adventure.text.minimessage.MiniMessage;
-import net.kyori.adventure.text.serializer.legacy.LegacyComponentSerializer;
 
 import java.util.UUID;
 
 /**
- * Linen player interface representing a player in the game.
+ * Linen player interface.
  */
-public interface LinenPlayer extends PlatformObjectHolder {
+public interface LinenPlayer extends LinenCommandSender {
 
     /**
      * Gets the name of the player.
@@ -34,52 +29,6 @@ public interface LinenPlayer extends PlatformObjectHolder {
      * @return the unique ID
      */
     UUID getUniqueId();
-
-    /**
-     * Sends a legacy formatted message to the player at the specified chat location.
-     *
-     * @param legacyMessage the legacy formatted message
-     * @param location      the location to send the message to
-     */
-    void sendMessage(String legacyMessage, ChatLocation location);
-
-    /**
-     * Sends a legacy formatted message to the player in the chat.
-     *
-     * @param legacyMessage the legacy formatted message
-     */
-    default void sendMessage(String legacyMessage) {
-        sendMessage(legacyMessage, ChatLocation.CHAT);
-    }
-
-    /**
-     * Sends a component message to the player at the specified chat location.
-     *
-     * @param message  the component message
-     * @param location the location to send the message to
-     */
-    default void sendComponentMessage(Component message, ChatLocation location) {
-        sendMessage(LegacyComponentSerializer.legacySection().serialize(message), location);
-    }
-
-    /**
-     * Sends a component message to the player in the chat.
-     *
-     * @param miniMessage the MiniMessage formatted string
-     */
-    default void sendRichMessage(String miniMessage) {
-        sendComponentMessage(MiniMessage.miniMessage().deserialize(miniMessage), ChatLocation.CHAT);
-    }
-
-    /**
-     * Sends a MiniMessage formatted message to the player at the specified chat location.
-     *
-     * @param miniMessage the MiniMessage formatted string
-     * @param location    the location to send the message to
-     */
-    default void sendRichMessage(String miniMessage, ChatLocation location) {
-        sendComponentMessage(MiniMessage.miniMessage().deserialize(miniMessage), location);
-    }
 
     /**
      * Plays a sound to the player.

@@ -23,11 +23,11 @@ public abstract class SoundMessageType<T> implements MessageType {
     /**
      * Sets the sound callback for this message type.
      *
-     * @param soundPlayer The sound callback to be executed when the message is sent.
+     * @param soundCallback The sound callback to be executed when the message is sent.
      * @return the current message type instance.
      */
-    public T sound(Consumer<LinenPlayer> soundPlayer) {
-        this.soundCallback = soundPlayer;
+    public T sound(Consumer<LinenPlayer> soundCallback) {
+        this.soundCallback = soundCallback;
         return (T) this;
     }
 
@@ -40,7 +40,7 @@ public abstract class SoundMessageType<T> implements MessageType {
      * @return the current message type instance.
      */
     public T sound(String sound, float volume, float pitch) {
-        this.soundCallback = player -> player.playSound(sound, volume, pitch);
+        this.soundCallback = sender -> sender.playSound(sound, volume, pitch);
         return (T) this;
     }
 

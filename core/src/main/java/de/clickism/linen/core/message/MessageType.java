@@ -6,6 +6,7 @@
 
 package de.clickism.linen.core.message;
 
+import de.clickism.linen.core.player.LinenCommandSender;
 import de.clickism.linen.core.player.LinenPlayer;
 import de.clickism.linen.core.scheduler.LinenScheduler;
 
@@ -19,11 +20,11 @@ public interface MessageType {
      */
     MessageType SUCCESS = MessageType.icon("✔")
             .iconColor("green")
-            .sound(player -> {
-                player.playSound("block.note_block.chime", 1f, 1f);
+            .sound(sender -> {
+                sender.playSound("block.note_block.chime", 1f, 1f);
                 LinenScheduler.scheduler()
                         .task(task -> {
-                            player.playSound("block.note_block.chime", 1f, 2f);
+                            sender.playSound("block.note_block.chime", 1f, 2f);
                         })
                         .delay(2)
                         .schedule();
@@ -84,63 +85,63 @@ public interface MessageType {
     void playSound(LinenPlayer player);
 
     /**
-     * Sends a message to a player with the specified location and sound option.
+     * Sends a message to a sender with the specified location and sound option.
      *
-     * @param player    the player to send the message to
+     * @param sender    the sender to send the message to
      * @param message   the message to send
      * @param location  the chat location
      * @param playSound whether to play the associated sound
      * @param rich      whether to send the message as rich text (MiniMessage)
      */
-    default void send(LinenPlayer player, String message, ChatLocation location, boolean playSound, boolean rich) {
+    default void send(LinenCommandSender sender, String message, ChatLocation location, boolean playSound, boolean rich) {
         String formattedMessage = format(message, location);
         if (rich) {
-            player.sendRichMessage(formattedMessage, location);
+            sender.sendRichMessage(formattedMessage, location);
         } else {
-            player.sendMessage(formattedMessage, location);
+            sender.sendMessage(formattedMessage, location);
         }
-        if (playSound) {
+        if (playSound && sender instanceof LinenPlayer player) {
             playSound(player);
         }
     }
 
     /**
-     * Sends a message to a player in the chat location and plays the associated sound.
+     * Sends a message to a sender in the chat location and plays the associated sound.
      *
-     * @param player  the player to send the message to
+     * @param sender  the sender to send the message to
      * @param message the message to send
      */
-    default void send(LinenPlayer player, String message) {
-        send(player, message, ChatLocation.CHAT, true, true);
+    default void send(LinenCommandSender sender, String message) {
+        send(sender, message, ChatLocation.CHAT, true, true);
     }
 
     /**
-     * Sends a message to a player in the chat location without playing the associated sound.
+     * Sends a message to a sender in the chat location without playing the associated sound.
      *
-     * @param player  the player to send the message to
+     * @param sender  the sender to send the message to
      * @param message the message to send
      */
-    default void sendSilently(LinenPlayer player, String message) {
-        send(player, message, ChatLocation.CHAT, false, true);
+    default void sendSilently(LinenCommandSender sender, String message) {
+        send(sender, message, ChatLocation.CHAT, false, true);
     }
 
     /**
-     * Sends a message to a player in the overlay location and plays the associated sound.
+     * Sends a message to a sender in the overlay location and plays the associated sound.
      *
-     * @param player  the player to send the message to
+     * @param sender  the sender to send the message to
      * @param message the message to send
      */
-    default void sendOverlay(LinenPlayer player, String message) {
-        send(player, message, ChatLocation.OVERLAY, true, true);
+    default void sendOverlay(LinenCommandSender sender, String message) {
+        send(sender, message, ChatLocation.OVERLAY, true, true);
     }
 
     /**
-     * Sends a message to a player in the overlay location without playing the associated sound.
+     * Sends a message to a sender in the overlay location without playing the associated sound.
      *
-     * @param player  the player to send the message to
+     * @param sender  the sender to send the message to
      * @param message the message to send
      */
-    default void sendOverlaySilently(LinenPlayer player, String message) {
-        send(player, message, ChatLocation.OVERLAY, false, true);
+    default void sendOverlaySilently(LinenCommandSender sender, String message) {
+        send(sender, message, ChatLocation.OVERLAY, false, true);
     }
 }

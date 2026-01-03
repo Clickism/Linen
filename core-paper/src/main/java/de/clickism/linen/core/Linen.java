@@ -6,9 +6,12 @@
 
 package de.clickism.linen.core;
 
+import de.clickism.linen.core.paper.player.PaperCommandSender;
 import de.clickism.linen.core.paper.player.PaperPlayer;
+import de.clickism.linen.core.player.LinenCommandSender;
 import de.clickism.linen.core.player.LinenPlayer;
 import de.clickism.linen.core.scheduler.LinenScheduler;
+import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 import org.bukkit.plugin.Plugin;
 
@@ -30,8 +33,21 @@ public class Linen {
 
     /**
      * Wraps a Bukkit Player into a LinenPlayer.
+     *
+     * @param player The player to wrap.
+     * @return The wrapped LinenPlayer.
      */
     public static LinenPlayer player(Player player) {
         return new PaperPlayer(player);
+    }
+
+    /**
+     * Wraps a Bukkit CommandSender into a LinenCommandSender.
+     *
+     * @param sender The command sender to wrap.
+     * @return The wrapped LinenCommandSender.
+     */
+    public static LinenCommandSender commandSender(CommandSender sender) {
+        return new PaperCommandSender(sender);
     }
 }
