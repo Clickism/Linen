@@ -8,14 +8,14 @@ package de.clickism.linen.core.fabric.player;
 
 import de.clickism.linen.core.message.ChatLocation;
 import de.clickism.linen.core.player.LinenCommandSender;
-import net.minecraft.command.DefaultPermissions;
-import net.minecraft.server.command.ServerCommandSource;
-import net.minecraft.text.Text;
+import net.minecraft.commands.CommandSourceStack;
+import net.minecraft.network.chat.Component;
+import net.minecraft.server.permissions.Permissions;
 
 public class FabricCommandSender implements LinenCommandSender {
-    private final ServerCommandSource sender;
+    private final CommandSourceStack sender;
 
-    public FabricCommandSender(ServerCommandSource sender) {
+    public FabricCommandSender(CommandSourceStack sender) {
         this.sender = sender;
     }
 
@@ -26,13 +26,13 @@ public class FabricCommandSender implements LinenCommandSender {
 
     @Override
     public boolean isOp() {
-        var perms = sender.getPermissions();
-        return perms.hasPermission(DefaultPermissions.ADMINS) || perms.hasPermission(DefaultPermissions.OWNERS);
+        var perms = sender.permissions();
+        return perms.hasPermission(Permissions.COMMANDS_ADMIN) || perms.hasPermission(Permissions.COMMANDS_OWNER);
     }
 
     @Override
     public void sendMessage(String legacyMessage, ChatLocation location) {
-        sender.sendFeedback(() -> Text.literal(legacyMessage), false);
+        sender.sendSuccess(() -> Component.literal(legacyMessage), false);
     }
 
     @Override

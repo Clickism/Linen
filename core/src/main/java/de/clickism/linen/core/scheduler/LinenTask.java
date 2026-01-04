@@ -24,9 +24,9 @@ public class LinenTask {
     private boolean cancelled = false;
     private long delayTicks = 0;
     private @Nullable Long intervalTicks = null;
-    private @Nullable Long maxExecution = null;
+    private @Nullable Long maxExecutions = null;
 
-    private long executionCount = 0;
+    private long executions = 0;
 
     /**
      * Creates a new LinenTask with the specified executor and scheduler.
@@ -91,17 +91,17 @@ public class LinenTask {
      * @return the current LinenTask instance
      */
     public LinenTask atMost(long executions) {
-        this.maxExecution = executions;
+        this.maxExecutions = executions;
         return this;
     }
 
     /**
      * Gets the maximum number of executions for this task, if set.
      *
-     * @return an Optional containing the maximum executions, or empty if not set
+     * @return maximum executions, or -1 if not set
      */
-    public Optional<Long> maxExecutions() {
-        return Optional.ofNullable(maxExecution);
+    public long atMost() {
+        return maxExecutions != null ? maxExecutions : -1;
     }
 
     /**
@@ -130,7 +130,10 @@ public class LinenTask {
      * @return true if the task is cancelled or has reached its maximum executions, false otherwise
      */
     public boolean isCancelled() {
-        return cancelled || maxExecutions().map(max -> executionCount >= max).orElse(false);
+        if (maxExecutions == null) {
+            return cancelled;
+        }
+        return cancelled || executions >= maxExecutions;
     }
 
     /**
@@ -149,8 +152,8 @@ public class LinenTask {
      *
      * @return the execution count
      */
-    public long executionCount() {
-        return executionCount;
+    public long executions() {
+        return executions;
     }
 
     /**
@@ -161,14 +164,14 @@ public class LinenTask {
      * @return true if this is the final execution, false otherwise
      */
     public boolean isFinalExecution() {
-        return maxExecutions().map(max -> executionCount + 1 >= max).orElse(false);
+        return maxExecutions != null && executions + 1 >= maxExecutions;
     }
 
     /**
      * Increments the execution count by one.
      */
-    protected void incrementExecutionCount() {
-        this.executionCount++;
+    protected void incrementExecutions() {
+        this.executions++;
     }
 
     @Override

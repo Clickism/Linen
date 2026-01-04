@@ -8,24 +8,24 @@ package de.clickism.linen.core.fabric;
 
 import de.clickism.linen.core.platform.PlatformObjectNotFoundException;
 import de.clickism.linen.core.sound.LinenSoundCategory;
-import net.minecraft.sound.SoundCategory;
-import net.minecraft.sound.SoundEvent;
-import net.minecraft.util.Identifier;
+import net.minecraft.resources.Identifier;
+import net.minecraft.sounds.SoundEvent;
+import net.minecraft.sounds.SoundSource;
 
 public class PlatformObjects {
     public static SoundEvent soundEvent(String sound) {
-        try {
-            return SoundEvent.of(Identifier.tryParse(sound));
-        } catch (Exception e) {
-            throw new PlatformObjectNotFoundException(SoundEvent.class, sound);
+        var id = Identifier.tryParse(sound);
+        if (id == null) {
+            id = Identifier.withDefaultNamespace(sound);
         }
+        return SoundEvent.createVariableRangeEvent(id);
     }
 
-    public static SoundCategory soundCategory(LinenSoundCategory category) {
+    public static SoundSource soundCategory(LinenSoundCategory category) {
         try {
-            return SoundCategory.valueOf(category.name());
+            return SoundSource.valueOf(category.name());
         } catch (IllegalArgumentException e) {
-            throw new PlatformObjectNotFoundException(SoundCategory.class, category.name());
+            throw new PlatformObjectNotFoundException(SoundSource.class, category.name());
         }
     }
 }

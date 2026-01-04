@@ -11,39 +11,39 @@ import de.clickism.linen.core.message.ChatLocation;
 import de.clickism.linen.core.platform.PlatformObjectNotFoundException;
 import de.clickism.linen.core.player.LinenPlayer;
 import de.clickism.linen.core.sound.LinenSoundCategory;
-import net.minecraft.server.network.ServerPlayerEntity;
-import net.minecraft.text.Text;
-
 import java.util.UUID;
+import net.minecraft.network.chat.Component;
+import net.minecraft.server.level.ServerPlayer;
+import net.minecraft.sounds.SoundEvent;
 
 public class FabricPlayer extends FabricCommandSender implements LinenPlayer {
-    private final ServerPlayerEntity player;
+    private final ServerPlayer player;
 
-    public FabricPlayer(ServerPlayerEntity player) {
-        super(player.getCommandSource());
+    public FabricPlayer(ServerPlayer player) {
+        super(player.createCommandSourceStack());
         this.player = player;
     }
 
     @Override
     public String getName() {
-        return player.getName().getLiteralString();
+        return player.getName().tryCollapseToString();
     }
 
     @Override
     public UUID getUniqueId() {
-        return player.getUuid();
+        return player.getUUID();
     }
 
     @Override
     public void sendMessage(String legacyMessage, ChatLocation location) {
-        player.sendMessage(Text.literal(legacyMessage), location == ChatLocation.OVERLAY);
+        player.displayClientMessage(Component.literal(legacyMessage), location == ChatLocation.OVERLAY);
     }
 
     @Override
     public void playSound(String sound, LinenSoundCategory category, float volume, float pitch) throws PlatformObjectNotFoundException {
         var soundEvent = PlatformObjects.soundEvent(sound);
         var soundCategory = PlatformObjects.soundCategory(category);
-        player.getEntityWorld().playSound(
+        player.level().playSound(
                 null,
                 player.getX(),
                 player.getY(),

@@ -32,24 +32,30 @@ public interface LinenPlayer extends LinenCommandSender {
 
     /**
      * Plays a sound to the player.
+     * <p>
+     * Should fail silently if the sound could not be found.
+     * <p>
+     * Should throw an exception if the category could not be found.
      *
      * @param sound    the sound identifier
      * @param category the sound category
      * @param volume   the volume
      * @param pitch    the pitch
-     * @throws PlatformObjectNotFoundException if the sound or category could not be found
+     * @throws PlatformObjectNotFoundException if the category could not be found
      */
     void playSound(String sound, LinenSoundCategory category, float volume, float pitch) throws PlatformObjectNotFoundException;
 
     /**
      * Plays a sound to the player with the MASTER category.
+     * <p>
+     * Should fail silently if the sound could not be found.
      *
      * @param sound  the sound  identifier
      * @param volume the volume
      * @param pitch  the pitch
      * @throws PlatformObjectNotFoundException if the sound could not be foundq-
      */
-    default void playSound(String sound, float volume, float pitch) throws PlatformObjectNotFoundException {
+    default void playSound(String sound, float volume, float pitch) {
         playSound(sound, LinenSoundCategory.MASTER, volume, pitch);
     }
 

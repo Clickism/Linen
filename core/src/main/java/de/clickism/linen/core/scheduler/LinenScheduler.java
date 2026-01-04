@@ -82,7 +82,7 @@ public class LinenScheduler {
     private void runTaskAndReschedule(LinenTask task) {
         if (task.isCancelled()) return;
         task.executor().execute(task);
-        task.incrementExecutionCount();
+        task.incrementExecutions();
         // Reschedule task.
         task.intervalTicks().ifPresent(interval -> {
             if (task.isCancelled()) return;
