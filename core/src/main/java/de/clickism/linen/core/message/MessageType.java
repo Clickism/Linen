@@ -18,31 +18,22 @@ public interface MessageType {
     /**
      * Predefined message type for success messages.
      */
-    MessageType SUCCESS = MessageType.icon("✔")
-            .iconColor("green")
-            .sound(sender -> {
-                sender.playSound("block.note_block.chime", 1f, 1f);
-                LinenScheduler.scheduler()
-                        .task(task -> {
-                            sender.playSound("block.note_block.chime", 1f, 2f);
-                        })
-                        .delay(2)
-                        .schedule();
-            });
+    MessageType SUCCESS = MessageType.icon("✔").iconColor("green").sound(sender -> {
+        sender.playSound("block.note_block.chime", 1f, 1f);
+        LinenScheduler.scheduler().task(task -> {
+            sender.playSound("block.note_block.chime", 1f, 2f);
+        }).delay(2).schedule();
+    });
 
     /**
      * Predefined message type for warning messages.
      */
-    MessageType WARN = MessageType.icon("⚠")
-            .iconColor("yellow")
-            .sound("block.amethyst_block.resonate", 1f, 1f);
+    MessageType WARN = MessageType.icon("⚠").iconColor("yellow").sound("block.amethyst_block.resonate", 1f, 1f);
 
     /**
      * Predefined message type for error messages.
      */
-    MessageType ERROR = MessageType.icon("❌")
-            .iconColor("red")
-            .sound("block.amethyst_block.resonate", 1f, .5f);
+    MessageType ERROR = MessageType.icon("❌").iconColor("red").sound("block.amethyst_block.resonate", 1f, .5f);
 
     /**
      * Creates a simple message type with the specified chat format.
@@ -143,5 +134,15 @@ public interface MessageType {
      */
     default void sendOverlaySilently(LinenCommandSender sender, String message) {
         send(sender, message, ChatLocation.OVERLAY, false, true);
+    }
+
+    /**
+     * Creates a typed message with the given message.
+     *
+     * @param message the message content
+     * @return the typed message
+     */
+    default TypedMessage withMessage(String message) {
+        return TypedMessage.of(this, message);
     }
 }
