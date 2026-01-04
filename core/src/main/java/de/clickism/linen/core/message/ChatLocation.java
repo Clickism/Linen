@@ -6,7 +6,16 @@
 
 package de.clickism.linen.core.message;
 
+/**
+ * Enum representing chat locations.
+ */
 public enum ChatLocation {
+    /**
+     * Chat location for regular chat messages.
+     */
     CHAT,
+    /**
+     * Chat location for overlay (action bar) messages.
+     */
     OVERLAY,
 }

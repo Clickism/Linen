@@ -6,15 +6,23 @@
 
 package de.clickism.linen.core.fabric.player;
 
+import de.clickism.linen.core.fabric.version.VersionUtil;
 import de.clickism.linen.core.message.ChatLocation;
 import de.clickism.linen.core.player.LinenCommandSender;
 import net.minecraft.commands.CommandSourceStack;
 import net.minecraft.network.chat.Component;
-import net.minecraft.server.permissions.Permissions;
 
+/**
+ * Fabric implementation of LinenCommandSender.
+ */
 public class FabricCommandSender implements LinenCommandSender {
     private final CommandSourceStack sender;
 
+    /**
+     * Constructor for FabricCommandSender.
+     *
+     * @param sender the CommandSourceStack to wrap
+     */
     public FabricCommandSender(CommandSourceStack sender) {
         this.sender = sender;
     }
@@ -26,8 +34,7 @@ public class FabricCommandSender implements LinenCommandSender {
 
     @Override
     public boolean isOp() {
-        var perms = sender.permissions();
-        return perms.hasPermission(Permissions.COMMANDS_ADMIN) || perms.hasPermission(Permissions.COMMANDS_OWNER);
+        return VersionUtil.isOp(sender);
     }
 
     @Override

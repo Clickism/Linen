@@ -20,6 +20,10 @@ import net.minecraft.world.entity.player.Player;
  * Main and factory class for Linen on Fabric.
  */
 public class Linen {
+    private Linen() {
+        // Prevent instantiation
+    }
+
     /**
      * Initializes Linen for Fabric.
      */
@@ -56,6 +60,6 @@ public class Linen {
      * @return The wrapped LinenCommandSender.
      */
     public static LinenCommandSender commandSender(Player player) {
-        return new FabricCommandSender(((ServerPlayer) player).createCommandSourceStack());
+        return new FabricPlayer((ServerPlayer) player);
     }
 }

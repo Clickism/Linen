@@ -42,12 +42,15 @@ public class Linen {
     }
 
     /**
-     * Wraps a Bukkit CommandSender into a LinenCommandSender.
+     * Wraps a Bukkit CommandSender or Player into a LinenCommandSender.
      *
      * @param sender The command sender to wrap.
      * @return The wrapped LinenCommandSender.
      */
     public static LinenCommandSender commandSender(CommandSender sender) {
+        if (sender instanceof Player player) {
+            return player(player);
+        }
         return new PaperCommandSender(sender);
     }
 }

@@ -70,7 +70,7 @@ publishing {
             from(components["java"])
             groupId = group.toString()
             artifactId = "linen-core-fabric"
-            version = "${version}+${minecraftVersion}"
+            version = "${version}"
             pom {
                 name.set("Linen")
                 description.set("Fabric implementation of the server side development framework Linen.")

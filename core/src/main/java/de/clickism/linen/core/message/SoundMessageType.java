@@ -21,6 +21,12 @@ public abstract class SoundMessageType<T> implements MessageType {
     private Consumer<LinenPlayer> soundCallback = player -> {};
 
     /**
+     * Constructor for SoundMessageType.
+     */
+    public SoundMessageType() {
+    }
+
+    /**
      * Sets the sound callback for this message type.
      *
      * @param soundCallback The sound callback to be executed when the message is sent.
