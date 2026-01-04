@@ -23,31 +23,31 @@ public enum LinenSoundCategory {
      */
     RECORDS,
     /**
-     * Weather sound category (ambient environmental sounds like rain).
+     * Weather sound category.
      */
     WEATHER,
     /**
-     * Block-related sounds (placing, breaking, interacting with blocks).
+     * Block-related sounds.
      */
     BLOCKS,
     /**
-     * Hostile creature sounds (mobs that attack the player).
+     * Hostile creature sounds.
      */
     HOSTILE,
     /**
-     * Neutral creature sounds (mobs that are not hostile by default).
+     * Neutral creature sounds.
      */
     NEUTRAL,
     /**
-     * Player-related sounds (footsteps, damage, actions).
+     * Player-related sounds.
      */
     PLAYERS,
     /**
-     * Ambient sounds (background ambience and environment).
+     * Ambient sounds.
      */
     AMBIENT,
     /**
-     * Voice sounds (speech and vocalizations).
+     * Voice sounds.
      */
     VOICE,
 }
