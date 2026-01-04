@@ -12,14 +12,19 @@ plugins {
     id("signing")
 }
 
+val libraryVersion = property("library_version").toString()
+val minecraftVersion = stonecutter.current.version
+
 group = "de.clickism"
-version = property("library_version").toString()
+version = "${libraryVersion}+${minecraftVersion}"
 
 repositories {
     mavenCentral()
 }
 
-val minecraftVersion = stonecutter.current.version
+base {
+    archivesName.set("linen-core-fabric")
+}
 
 dependencies {
     // Core
@@ -33,10 +38,6 @@ dependencies {
     modImplementation("net.fabricmc.fabric-api:fabric-api:${property("deps.fabric_api")}")
     minecraft("com.mojang:minecraft:${minecraftVersion}")
     mappings(loom.officialMojangMappings())
-    // Testing
-    testImplementation(platform("org.junit:junit-bom:5.10.0"))
-    testImplementation("org.junit.jupiter:junit-jupiter")
-    testRuntimeOnly("org.junit.platform:junit-platform-launcher")
 }
 
 java {
@@ -45,16 +46,16 @@ java {
     withJavadocJar()
 }
 
-tasks.test {
-    useJUnitPlatform()
-}
-
 tasks.processResources {
     val properties = mapOf(
+        // Mod version
         "version" to version,
-        "targetVersion" to minecraftVersion,
+        // Supported Minecraft versions, e.g. ">=1.20.1"
+        "supportedVersions" to project.property("mod.supported_versions").toString(),
+        // Target Minecraft version
         "minecraftVersion" to minecraftVersion,
-        "fabricVersion" to project.property("deps.fabric_loader"),
+        // Fabric Loader version
+        "fabricLoaderVersion" to project.property("deps.fabric_loader"),
     )
 
     filesMatching("fabric.mod.json") {

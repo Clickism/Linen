@@ -13,6 +13,10 @@ plugins {
 group = "de.clickism"
 version = property("library_version").toString()
 
+base {
+    archivesName.set("linen-core-paper")
+}
+
 repositories {
     mavenCentral()
     maven("https://repo.papermc.io/repository/maven-public/")

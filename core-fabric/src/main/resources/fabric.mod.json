@@ -14,8 +14,8 @@
   "license": "ARR",
   "environment": "*",
   "depends": {
-    "fabricloader": ">=${fabricVersion}",
-    "minecraft": "${targetVersion}",
+    "fabricloader": ">=${fabricLoaderVersion}",
+    "minecraft": "${supportedVersions}",
     "java": ">=17",
     "fabric-api": "*"
   },
