@@ -29,10 +29,6 @@ base {
 dependencies {
     // Core
     implementation(project(":core:api"))
-    // Adventure API (Not bundled with Fabric)
-    implementation("net.kyori:adventure-api:4.25.0")
-    implementation("net.kyori:adventure-text-minimessage:4.25.0")
-    implementation("net.kyori:adventure-text-serializer-legacy:4.25.0")
     // Fabric
     modImplementation("net.fabricmc:fabric-loader:${property("deps.fabric_loader")}")
     modImplementation("net.fabricmc.fabric-api:fabric-api:${property("deps.fabric_api")}")
@@ -78,7 +74,7 @@ publishing {
             from(components["java"])
             groupId = group.toString()
             artifactId = "linen-core-fabric"
-            version = "${version}"
+            version = version.toString()
             pom {
                 name.set("Linen")
                 description.set("Fabric implementation of the server side development framework Linen.")

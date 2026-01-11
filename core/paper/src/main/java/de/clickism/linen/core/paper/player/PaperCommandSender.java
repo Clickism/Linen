@@ -8,6 +8,7 @@ package de.clickism.linen.core.paper.player;
 
 import de.clickism.linen.core.message.ChatLocation;
 import de.clickism.linen.core.player.LinenCommandSender;
+import net.kyori.adventure.text.minimessage.MiniMessage;
 import org.bukkit.command.CommandSender;
 
 public class PaperCommandSender implements LinenCommandSender {
@@ -30,6 +31,16 @@ public class PaperCommandSender implements LinenCommandSender {
     @Override
     public void sendMessage(String legacyMessage, ChatLocation location) {
         sender.sendMessage(legacyMessage);
+    }
+
+    @Override
+    public void sendRichMessage(String miniMiniMessage, ChatLocation location) {
+        var component = MiniMessage.miniMessage().deserialize(miniMiniMessage);
+        if (location == ChatLocation.CHAT) {
+            sender.sendMessage(component);
+        } else {
+            sender.sendActionBar(component);
+        }
     }
 
     @Override

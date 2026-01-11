@@ -23,9 +23,6 @@ base {
 }
 
 dependencies {
-    compileOnlyApi("net.kyori:adventure-api:4.25.0")
-    compileOnlyApi("net.kyori:adventure-text-minimessage:4.25.0")
-    compileOnlyApi("net.kyori:adventure-text-serializer-legacy:4.25.0")
     // Annotations
     compileOnlyApi("org.jetbrains:annotations:24.0.0")
 }
@@ -41,7 +38,7 @@ publishing {
         create<MavenPublication>("mavenJava") {
             from(components["java"])
             groupId = group.toString()
-            artifactId = "linen-core"
+            artifactId = "linen-core-api"
             version = version.toString()
             pom {
                 name.set("Linen")

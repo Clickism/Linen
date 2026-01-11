@@ -7,10 +7,8 @@
 package de.clickism.linen.core.player;
 
 import de.clickism.linen.core.message.ChatLocation;
+import de.clickism.linen.core.message.colorizer.MiniMiniMessage;
 import de.clickism.linen.core.platform.PlatformObjectHolder;
-import net.kyori.adventure.text.Component;
-import net.kyori.adventure.text.minimessage.MiniMessage;
-import net.kyori.adventure.text.serializer.legacy.LegacyComponentSerializer;
 
 /**
  * Linen command sender interface.
@@ -49,31 +47,21 @@ public interface LinenCommandSender extends PlatformObjectHolder {
     }
 
     /**
-     * Sends a component message to the player at the specified chat location.
-     *
-     * @param message  the component message
-     * @param location the location to send the message to
-     */
-    default void sendComponentMessage(Component message, ChatLocation location) {
-        sendMessage(LegacyComponentSerializer.legacySection().serialize(message), location);
-    }
-
-    /**
      * Sends a component message to the player in the chat.
      *
-     * @param miniMessage the MiniMessage formatted string
+     * @param miniMiniMessage the MiniMiniMessage formatted string
      */
-    default void sendRichMessage(String miniMessage) {
-        sendComponentMessage(MiniMessage.miniMessage().deserialize(miniMessage), ChatLocation.CHAT);
+    default void sendRichMessage(String miniMiniMessage) {
+        sendRichMessage(miniMiniMessage, ChatLocation.CHAT);
     }
 
     /**
-     * Sends a MiniMessage formatted message to the player at the specified chat location.
+     * Sends a MiniMiniMessage formatted message to the player at the specified chat location.
      *
-     * @param miniMessage the MiniMessage formatted string
+     * @param miniMiniMessage the MiniMiniMessage formatted string
      * @param location    the location to send the message to
      */
-    default void sendRichMessage(String miniMessage, ChatLocation location) {
-        sendComponentMessage(MiniMessage.miniMessage().deserialize(miniMessage), location);
+    default void sendRichMessage(String miniMiniMessage, ChatLocation location) {
+        sendMessage(MiniMiniMessage.parse(miniMiniMessage), location);
     }
 }
