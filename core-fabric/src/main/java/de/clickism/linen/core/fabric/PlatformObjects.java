@@ -6,9 +6,9 @@
 
 package de.clickism.linen.core.fabric;
 
-import de.clickism.linen.core.fabric.version.IdentifierWrapper;
 import de.clickism.linen.core.platform.PlatformObjectNotFoundException;
 import de.clickism.linen.core.sound.LinenSoundCategory;
+import net.minecraft.resources.Identifier;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.sounds.SoundSource;
 
@@ -27,11 +27,11 @@ public class PlatformObjects {
      * @return the corresponding SoundEvent
      */
     public static SoundEvent soundEvent(String sound) {
-        var id = IdentifierWrapper.tryParse(sound);
+        var id = Identifier.tryParse(sound);
         if (id == null) {
-            id = IdentifierWrapper.withDefaultNamespace(sound);
+            id = Identifier.withDefaultNamespace(sound);
         }
-        return SoundEvent.createVariableRangeEvent(id.unwrap());
+        return SoundEvent.createVariableRangeEvent(id);
     }
 
     /**

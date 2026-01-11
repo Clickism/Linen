@@ -64,6 +64,14 @@ tasks.processResources {
     inputs.properties(properties)
 }
 
+stonecutter {
+    replacements {
+        string(current.parsed < "1.21.11") {
+            replace("Identifier", "ResourceLocation")
+        }
+    }
+}
+
 publishing {
     publications {
         create<MavenPublication>("mavenJava") {
