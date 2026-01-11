@@ -14,6 +14,9 @@ import net.kyori.adventure.text.serializer.legacy.LegacyComponentSerializer;
  * Utility class for colorizing messages.
  */
 public class Colorizer {
+    private Colorizer() {
+        // Utility class
+    }
     /**
      * Converts a MiniMessage formatted string to a legacy formatted string.
      *

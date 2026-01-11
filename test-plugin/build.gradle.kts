@@ -14,8 +14,8 @@ repositories {
 
 dependencies {
     // Core
-    implementation(project(":core"))
-    implementation(project(":core-paper"))
+    implementation(project(":core:api"))
+    implementation(project(":core:paper"))
     compileOnly("io.papermc.paper:paper-api:1.21-R0.1-SNAPSHOT")
     // Testing
     testImplementation(platform("org.junit:junit-bom:5.10.0"))

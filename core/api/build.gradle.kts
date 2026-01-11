@@ -6,6 +6,7 @@
 
 plugins {
     id("java")
+    id("java-library")
     id("maven-publish")
     id("signing")
 }
@@ -13,27 +14,26 @@ plugins {
 group = "de.clickism"
 version = property("library_version").toString()
 
-base {
-    archivesName.set("linen-core-paper")
-}
-
 repositories {
     mavenCentral()
-    maven("https://repo.papermc.io/repository/maven-public/")
+}
+
+base {
+    archivesName.set("linen-core-api")
 }
 
 dependencies {
-    // Core
-    implementation(project(":core"))
-    compileOnly("io.papermc.paper:paper-api:1.21-R0.1-SNAPSHOT")
-    // Testing
-    testImplementation(platform("org.junit:junit-bom:5.10.0"))
-    testImplementation("org.junit.jupiter:junit-jupiter")
-    testRuntimeOnly("org.junit.platform:junit-platform-launcher")
+    compileOnlyApi("net.kyori:adventure-api:4.25.0")
+    compileOnlyApi("net.kyori:adventure-text-minimessage:4.25.0")
+    compileOnlyApi("net.kyori:adventure-text-serializer-legacy:4.25.0")
+    // Annotations
+    compileOnlyApi("org.jetbrains:annotations:24.0.0")
 }
 
-tasks.test {
-    useJUnitPlatform()
+java {
+    toolchain.languageVersion.set(JavaLanguageVersion.of(21))
+    withSourcesJar()
+    withJavadocJar()
 }
 
 publishing {
@@ -41,11 +41,11 @@ publishing {
         create<MavenPublication>("mavenJava") {
             from(components["java"])
             groupId = group.toString()
-            artifactId = "linen-core-paper"
-            version = "${version}"
+            artifactId = "linen-core"
+            version = version.toString()
             pom {
                 name.set("Linen")
-                description.set("Paper implementation of the server side development framework Linen.")
+                description.set("Server side development framework uniting Paper and Fabric.")
                 url.set("https://github.com/Clickism/Linen")
                 licenses {
                     license {

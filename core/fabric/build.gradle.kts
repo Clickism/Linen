@@ -28,7 +28,7 @@ base {
 
 dependencies {
     // Core
-    implementation(project(":core"))
+    implementation(project(":core:api"))
     // Adventure API (Not bundled with Fabric)
     implementation("net.kyori:adventure-api:4.25.0")
     implementation("net.kyori:adventure-text-minimessage:4.25.0")
