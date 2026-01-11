@@ -35,15 +35,6 @@ public class PaperPlayer extends PaperCommandSender implements LinenPlayer {
     }
 
     @Override
-    public void sendMessage(String legacyMessage, ChatLocation location) {
-        if (location == ChatLocation.CHAT) {
-            player.sendMessage(LegacyComponentSerializer.legacySection().deserialize(legacyMessage));
-        } else {
-            player.sendActionBar(LegacyComponentSerializer.legacySection().deserialize(legacyMessage));
-        }
-    }
-
-    @Override
     public void playSound(String sound, LinenSoundCategory category, float volume, float pitch) throws PlatformObjectNotFoundException {
         player.playSound(player, sound, PlatformObjects.soundCategory(category), volume, pitch);
     }

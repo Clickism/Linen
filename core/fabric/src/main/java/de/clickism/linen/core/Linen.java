@@ -50,6 +50,9 @@ public class Linen {
      * @return The wrapped LinenCommandSender.
      */
     public static LinenCommandSender commandSender(CommandSourceStack source) {
+        if (source.getEntity() instanceof ServerPlayer player) {
+            return player(player);
+        }
         return new FabricCommandSender(source);
     }
 
